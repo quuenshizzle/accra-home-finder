@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accra Home Finder | Find Your Perfect Home</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:#172033;background:#f7f8fb;line-height:1.6}
+header{background:#102a56;color:white;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px #0002}
+.nav{max-width:1150px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:24px;font-weight:800}.logo span{font-size:25px}
+nav a{color:white;text-decoration:none;margin-left:24px;font-weight:600}
+nav a:hover{color:#f5b942}
+.hero{min-height:560px;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:70px 20px;background:linear-gradient(#08275dcc,#08275dcc),url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85") center/cover}
+.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.1;margin-bottom:18px}
+.hero p{font-size:20px;margin-bottom:32px}
+.search-box{max-width:900px;margin:auto;background:white;padding:14px;border-radius:14px;display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:10px;box-shadow:0 10px 35px #0004}
+.search-box input,.search-box select{border:1px solid #ddd;border-radius:9px;padding:15px;font-size:15px;outline:none}
+button,.btn{border:0;border-radius:9px;padding:14px 22px;background:#f5b942;color:#102a56;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+button:hover,.btn:hover{filter:brightness(.95)}
+section{max-width:1150px;margin:auto;padding:70px 20px}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title h2{font-size:36px;color:#102a56}
+.section-title p{color:#687386}
+.properties{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 5px 20px #17203318}
+.card img{width:100%;height:220px;object-fit:cover}
+.card-body{padding:20px}.card h3{color:#102a56;margin-bottom:7px}
+.location{color:#687386;font-size:14px;margin-bottom:12px}
+.price{font-size:21px;font-weight:800;color:#d28a00;margin-bottom:15px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.tag{background:#eef3fb;color:#315486;padding:5px 9px;border-radius:20px;font-size:12px}
+.card-actions{display:flex;gap:8px}.card-actions .btn{flex:1;text-align:center;padding:11px}
+.about{background:#102a56;color:white;max-width:none}
+.about-inner{max-width:1150px;margin:auto;padding:70px 20px;text-align:center}
+.about h2{font-size:36px;margin-bottom:15px}.about p{max-width:750px;margin:auto;color:#dbe4f4}
+.contact{background:white;border-radius:16px;padding:35px;box-shadow:0 5px 20px #00000012}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
+.contact h2{color:#102a56;font-size:34px;margin-bottom:10px}
+footer{background:#091a35;color:#ccd6e8;text-align:center;padding:28px 20px}
+.empty{display:none;text-align:center;padding:35px;color:#687386}
+@media(max-width:800px){
+ nav a{margin-left:10px;font-size:13px}
+ .properties{grid-template-columns:1fr 1fr}
+ .search-box{grid-template-columns:1fr}
+ .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:550px){
+ .nav{flex-direction:column;gap:12px}.properties{grid-template-columns:1fr}
+ .hero{min-height:620px}.hero p{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><span>🏠</span> Accra Home Finder</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#homes">Homes</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <h1>Find Your Perfect Home in Accra</h1>
+    <p>Quality 2 & 3 bedroom homes available for sale and rent.</p>
+    <div class="search-box">
+      <input id="area" type="text" placeholder="Search area e.g. East Legon">
+      <select id="bedrooms">
+        <option value="">All Bedrooms</option>
+        <option value="2">2 Bedrooms</option>
+        <option value="3">3 Bedrooms</option>
+      </select>
+      <select id="purpose">
+        <option value="">Sale or Rent</option>
+        <option value="Sale">For Sale</option>
+        <option value="Rent">For Rent</option>
+      </select>
+      <button onclick="searchHomes()">Search</button>
+    </div>
+  </div>
+</section>
+
+<section id="homes">
+  <div class="section-title">
+    <h2>Featured Properties</h2>
+    <p>Browse homes available in Accra</p>
+  </div>
+
+  <div class="properties" id="propertyList">
+    <article class="card" data-area="East Legon" data-bedrooms="3" data-purpose="Rent">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80" alt="Modern house">
+      <div class="card-body">
+        <h3>Modern 3 Bedroom House</h3>
+        <div class="location">📍 East Legon, Accra</div>
+        <div class="price">GH₵ 12,000 / month</div>
+        <div class="tags"><span class="tag">3 Bedrooms</span><span class="tag">For Rent</span><span class="tag">Modern</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+
+    <article class="card" data-area="Spintex" data-bedrooms="2" data-purpose="Sale">
+      <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Beautiful home">
+      <div class="card-body">
+        <h3>Beautiful 2 Bedroom Home</h3>
+        <div class="location">📍 Spintex, Accra</div>
+        <div class="price">GH₵ 1,250,000</div>
+        <div class="tags"><span class="tag">2 Bedrooms</span><span class="tag">For Sale</span><span class="tag">Secure Area</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+
+    <article class="card" data-area="Adenta" data-bedrooms="3" data-purpose="Rent">
+      <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" alt="Family home">
+      <div class="card-body">
+        <h3>Spacious Family Home</h3>
+        <div class="location">📍 Adenta, Accra</div>
+        <div class="price">GH₵ 7,500 / month</div>
+        <div class="tags"><span class="tag">3 Bedrooms</span><span class="tag">For Rent</span><span class="tag">Family</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+
+    <article class="card" data-area="Tema" data-bedrooms="2" data-purpose="Rent">
+      <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80" alt="Contemporary house">
+      <div class="card-body">
+        <h3>Contemporary 2 Bedroom</h3>
+        <div class="location">📍 Tema, Greater Accra</div>
+        <div class="price">GH₵ 5,500 / month</div>
+        <div class="tags"><span class="tag">2 Bedrooms</span><span class="tag">For Rent</span><span class="tag">Parking</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+
+    <article class="card" data-area="Cantonments" data-bedrooms="3" data-purpose="Sale">
+      <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=900&q=80" alt="Luxury home">
+      <div class="card-body">
+        <h3>Luxury 3 Bedroom Residence</h3>
+        <div class="location">📍 Cantonments, Accra</div>
+        <div class="price">GH₵ 3,800,000</div>
+        <div class="tags"><span class="tag">3 Bedrooms</span><span class="tag">For Sale</span><span class="tag">Luxury</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+
+    <article class="card" data-area="Madina" data-bedrooms="2" data-purpose="Sale">
+      <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&w=900&q=80" alt="Residential house">
+      <div class="card-body">
+        <h3>Affordable 2 Bedroom House</h3>
+        <div class="location">📍 Madina, Accra</div>
+        <div class="price">GH₵ 950,000</div>
+        <div class="tags"><span class="tag">2 Bedrooms</span><span class="tag">For Sale</span><span class="tag">Affordable</span></div>
+        <div class="card-actions"><a class="btn" href="#contact">Enquire</a><a class="btn" href="https://wa.me/" target="_blank">WhatsApp</a></div>
+      </div>
+    </article>
+  </div>
+  <div class="empty" id="empty">No properties matched your search. Try another area or filter.</div>
+</section>
+
+<div class="about" id="about">
+  <div class="about-inner">
+    <h2>About Accra Home Finder</h2>
+    <p>We help home seekers discover quality properties in Accra and the Greater Accra Region. Browse available homes, compare options and contact us to arrange a viewing.</p>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="contact">
+    <div class="contact-grid">
+      <div>
+        <h2>Looking for a home?</h2>
+        <p>Tell us what you are looking for and we will help you find a suitable property.</p>
+        <br>
+        <p><strong>📞 Phone:</strong> +233 XX XXX XXXX</p>
+        <p><strong>📧 Email:</strong> info@accrahomefinder.com</p>
+      </div>
+      <div>
+        <a class="btn" href="mailto:info@accrahomefinder.com">Email Us</a>
+        <a class="btn" href="https://wa.me/" target="_blank">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  © 2026 Accra Home Finder. All rights reserved.
+</footer>
+
+<script>
+function searchHomes(){
+  const area=document.getElementById("area").value.trim().toLowerCase();
+  const beds=document.getElementById("bedrooms").value;
+  const purpose=document.getElementById("purpose").value;
+  const cards=document.querySelectorAll(".card");
+  let count=0;
+
+  cards.forEach(card=>{
+    const cardArea=card.dataset.area.toLowerCase();
+    const matchArea=!area || cardArea.includes(area);
+    const matchBeds=!beds || card.dataset.bedrooms===beds;
+    const matchPurpose=!purpose || card.dataset.purpose===purpose;
+    const show=matchArea && matchBeds && matchPurpose;
+    card.style.display=show ? "block" : "none";
+    if(show) count++;
+  });
+
+  document.getElementById("empty").style.display=count ? "none" : "block";
+  document.getElementById("homes").scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
